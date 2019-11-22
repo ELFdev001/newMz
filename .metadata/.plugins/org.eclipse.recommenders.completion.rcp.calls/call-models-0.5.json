@@ -1,0 +1,22 @@
+{
+  "I:\\MWGrid\\branches\\ManzikertSP\\environment\\src\\java": {
+    "location": "I:\\MWGrid\\branches\\ManzikertSP\\environment\\src\\java",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027I:\\MWGrid\\branches\\ManzikertSP\\environment\\src\\java\u0027. Skipped."
+  },
+  "C:\\Program Files\\Java\\jre7\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
+    "status": "RESOLVED"
+  },
+  "I:\\MWGrid\\branches\\ManzikertSP\\manzikert\\src\\java": {
+    "location": "I:\\MWGrid\\branches\\ManzikertSP\\manzikert\\src\\java",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027I:\\MWGrid\\branches\\ManzikertSP\\manzikert\\src\\java\u0027. Skipped."
+  },
+  "I:\\MWGrid\\branches\\ManzikertSP\\middleware\\src\\java": {
+    "location": "I:\\MWGrid\\branches\\ManzikertSP\\middleware\\src\\java",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027I:\\MWGrid\\branches\\ManzikertSP\\middleware\\src\\java\u0027. Skipped."
+  }
+}

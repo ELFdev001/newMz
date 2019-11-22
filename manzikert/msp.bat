@@ -1,0 +1,1 @@
+runnabletest.jar I:/MWGrid/branches/ManzikertSP/environment/src/resources/environment/SPinitfile.txt

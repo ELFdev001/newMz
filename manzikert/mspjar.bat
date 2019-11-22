@@ -1,0 +1,1 @@
+java -Djava.util.logging.config.file=src/config/Manzikert.logging -Xms40m -Xmx1400m -ea -jar runnabletest.jar I:/MWGrid/branches/ManzikertSP/environment/src/resources/environment/SPinitfile.txt

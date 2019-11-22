@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/manzikert/src/java/mwgrid/manzikert/ManzikertDaysMarchSP.java"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="1"/>
+</listAttribute>
+<stringAttribute key="org.eclipse.debug.ui.ATTR_CAPTURE_IN_FILE" value="I:\MWGrid\lastlog.txt"/>
+<stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="mwgrid.manzikert.ManzikertDaysMarchSP"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="I:/MWGrid/branches/ManzikertSP/environment/src/resources/environment/SPinitfile.txt"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="manzikert"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.util.logging.config.file=src/config/Manzikert.logging -Xms40m -Xmx1400m -ea"/>
+</launchConfiguration>

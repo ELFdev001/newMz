@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;BlenderPreProcessingTest.java&apos; to &apos;manzikert/src/java/mwgrid.manzikert&apos;&#x0D;&#x0A;- Original project: &apos;manzikert&apos;&#x0D;&#x0A;- Destination element: &apos;manzikert/src/java/mwgrid.manzikert&apos;&#x0D;&#x0A;- Original element: &apos;mwgrid.manzikert.BlenderPreProcessingTest.java&apos;" description="Copy compilation unit" destination="/src\/java&lt;mwgrid.manzikert" element1="/src\/java&lt;mwgrid.manzikert{BlenderPreProcessingTest.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1349097888967" units="1" version="1.0"/>
+</session>

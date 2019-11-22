@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.action.PlanMacroRouteTo"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.agent.BaggageAnimal"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.ClassType"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.agent.Officer"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.ManzikertContext"/>
+<fullyQualifiedTypeName name="mwgrid.environment.ExpandedSingletonInitFile"/>
+<fullyQualifiedTypeName name="mwgrid.manzikert.ContextSingleton"/>
+</qualifiedTypeNameHistroy>
