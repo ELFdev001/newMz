@@ -45,7 +45,7 @@ public final class Blender3DPreProcessingTest {
 	private static final Logger LOG =
 		Logger.getLogger(Blender3DPreProcessingTest.class.getPackage().getName());
 	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/environment/src/resources/environment/";
-	private static final String TICK_FILENAME = "0-500-0-750-2000-2000-2000-8000-true-DM106-3-SPtickfile.txt";
+	private static final String TICK_FILENAME = "0-500-0-750-2000-2000-2000-4000-true-DM107-test-SPtickfile.txt";
 	private static final int MAX_AGENTS = 45100;
 	private static final int TICKS = 12000;
 
