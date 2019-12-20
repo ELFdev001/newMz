@@ -442,28 +442,28 @@ public class ManzikertDaysMarchSP {
 				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
 				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
 				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 7);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
 				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
 				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
 				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
 				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 7);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
 				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
 				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
 				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
 				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 7);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			}
 		} else if (direction == CampNeighbours.DOWN_LEFT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
@@ -718,7 +718,7 @@ public class ManzikertDaysMarchSP {
 					unitID++;
 
 				} else if (mulcount < pMulSquads) {
-					LOG.finest("Adding Mule Officer at loc " + locX + ":" + locY);
+					LOG.info("Adding Mule Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
 						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();

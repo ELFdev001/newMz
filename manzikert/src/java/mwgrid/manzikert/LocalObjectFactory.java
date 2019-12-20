@@ -27,7 +27,7 @@ public final class LocalObjectFactory {
         return new Officer(ClassType.OFFICER, pLocation, pUnitID, pObjectID, pSetoffSpacing, pColLdr, ClassType.OFFICER.getSpeed());
     }
     
-    public static Officer createBaggageHandler(final Location pLocation,
+    public static BaggageHandler createBaggageHandler(final Location pLocation,
             final int pUnitID, final int pObjectID, final int pSetoffSpacing, final int pColLdr, final double pSpeed) {
         return new BaggageHandler(ClassType.BAGGAGE_HANDLER, pLocation, pUnitID, pObjectID, pSetoffSpacing, pColLdr, pSpeed);
     }

@@ -17,8 +17,6 @@ import mwgrid.manzikert.planning.PlanStructure;
 import mwgrid.middleware.distributedobject.Location;
 
 public class Officer extends MWGridAgent {
-	private static final Logger LOG =
-			Logger.getLogger(Officer.class.getPackage().getName());
 	private boolean fFollow;
 	public boolean fResting;
 	public int fSetoffSpacing;

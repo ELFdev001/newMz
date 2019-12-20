@@ -26,7 +26,7 @@ import mwgrid.middleware.distributedobject.Location.Neighbours;
 
 public abstract class MWGridAgent {
 
-	private static final Logger LOG = Logger.getLogger(MWGridAgent.class
+	protected static final Logger LOG = Logger.getLogger(MWGridAgent.class
 			.getPackage().getName());
 	public Location fLocation;
 	public Location fLastLocation;

@@ -1,5 +1,7 @@
 package mwgrid.manzikert.agent;
 
+import java.util.logging.Logger;
+
 import mwgrid.manzikert.ClassType;
 import mwgrid.manzikert.ContextSingleton;
 import mwgrid.manzikert.DMTimeHandling;
@@ -14,13 +16,9 @@ public class BaggageHandler extends Officer {
 	@Override
 	public void firstTick() {
 		super.firstTick();
+		LOG.info("Baggage handler has speed " + this.getSpeed());
 	}
 
-	@Override
-	public double getSpeed() {
-		return DMTimeHandling.getCavalrySpeed(ContextSingleton.getTime(), 1);
-	}
-	
 	@Override
 	public void step(final long pTime) {
 		super.step(pTime);
