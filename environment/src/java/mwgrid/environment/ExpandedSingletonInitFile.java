@@ -345,7 +345,7 @@ public final class ExpandedSingletonInitFile {
 	}
 
 	public static String getOutputTickFilename(final int pDay) {
-		final String oTF = (int) getOfficers() + "-" + (int) getOfficerCavalrySquads() + "-" + (int) getCavalrySquads() + "-" + (int) getInfantrySquads() + "-" + getStartLocation(pDay).getX() + "-" + getStartLocation(pDay).getY() + "-" + getDestinationLocation(pDay).getX() + "-" + getDestinationLocation(pDay).getY() + "-" + getRest() + "-" + textID + "-" + outputTickFilename;
+		final String oTF = (int) getOfficers() + "-" + (int) getOfficerCavalrySquads() + "-" + (int) getCavalrySquads() + "-" + (int) getInfantrySquads() + "-" + getBaggageTot() + "-" + getStartLocation(pDay).getX() + "-" + getStartLocation(pDay).getY() + "-" + getDestinationLocation(pDay).getX() + "-" + getDestinationLocation(pDay).getY() + "-" + getRest() + "-" + textID + "-" + outputTickFilename;
 		return oTF;
 	}
 
@@ -355,7 +355,7 @@ public final class ExpandedSingletonInitFile {
 	}
 
 	public static String getOutputDayFilename(final int pDay) {
-		final String oDF = (int) getOfficers() + "-" + (int) getOfficerCavalrySquads() + "-" + (int) getCavalrySquads() + "-" + (int) getInfantrySquads() + "-" + getStartLocation(pDay).getX() + "-" + getStartLocation(pDay).getY() + "-" + getDestinationLocation(pDay).getX() + "-" + getDestinationLocation(pDay).getY() + "-" + getRest() + "-" + textID + "-" + outputDayFilename;
+		final String oDF = (int) getOfficers() + "-" + (int) getOfficerCavalrySquads() + "-" + (int) getCavalrySquads() + "-" + (int) getInfantrySquads() + "-" + getBaggageTot() + "-" + getStartLocation(pDay).getX() + "-" + getStartLocation(pDay).getY() + "-" + getDestinationLocation(pDay).getX() + "-" + getDestinationLocation(pDay).getY() + "-" + getRest() + "-" + textID + "-" + outputDayFilename;
 		return oDF;
 	}
 
@@ -547,6 +547,9 @@ public final class ExpandedSingletonInitFile {
 		return cartSquads;
 	}
 
+	public static int getBaggageTot() {
+		return muleSquads + donkeySquads + horseSquads + camelSquads + cartSquads;
+	}
 	public static int getInfantrySquadSize() {
 		return infantrySquadSize;
 	}
