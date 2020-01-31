@@ -197,7 +197,8 @@ public class ManzikertDaysMarchSP {
 		int officerSquadCount = 0;
 		int spacing = 0;
 
-		final int outsideTotal = ExpandedSingletonInitFile.getCavalrySquads() + ExpandedSingletonInitFile.getInfantrySquads();
+		final int outsideSoldierTotal = ExpandedSingletonInitFile.getCavalrySquads() + ExpandedSingletonInitFile.getInfantrySquads();
+		final int outsideBaggageTotal = ExpandedSingletonInitFile.getBaggageTot();
 
 		LOG.info("Checking for previous day's march info");
 		if (dayofmarch > 1) {
@@ -229,14 +230,22 @@ public class ManzikertDaysMarchSP {
 		unitID = 1;
 
 		LOG.info("Calculating largest sector");
-		if (officers + officersquads > (outsideTotal / 4)) {
+		if (officers + officersquads > (outsideSoldierTotal / 4) && officers + officersquads > (outsideBaggageTotal / 4)) {
 			largestSector = (int) (officers + officersquads);
+		} else if (outsideSoldierTotal > outsideBaggageTotal){
+			largestSector = outsideSoldierTotal / 4;
 		} else {
-			largestSector = outsideTotal / 4;
+			largestSector = outsideBaggageTotal / 4;
 		}
 
 		radiusOfLargestSquare = (int) ((0.5 * Math.sqrt(largestSector)) * campspacebetweensquads);
-		radiusOfOuterSectors = (int) ((0.5 * Math.sqrt(outsideTotal / 4)) * campspacebetweensquads);
+		int lrgout = 0;
+		if (outsideBaggageTotal > outsideSoldierTotal) {
+			lrgout = outsideBaggageTotal / 4;
+		} else {
+			lrgout = outsideSoldierTotal / 4;
+		}
+		radiusOfOuterSectors = (int) ((0.5 * Math.sqrt(lrgout)) * campspacebetweensquads);
 		LOG.info("Radius of each camp spot is " + radiusOfLargestSquare);
 
 		LOG.info("Creating Officer Sector");
@@ -305,7 +314,7 @@ public class ManzikertDaysMarchSP {
 		final CampNeighbours direction = ContextSingleton.getCampDirection(ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()), ExpandedSingletonInitFile.getDestinationLocation(dayofmarch));
 		colLdrNumber = 2;
 
-		final int sectorTot = outsideTotal / 4;
+		final int sectorTot = outsideSoldierTotal / 4;
 		final int bagtot = ExpandedSingletonInitFile.getMuleSquads() + ExpandedSingletonInitFile.getDonkeySquads() + ExpandedSingletonInitFile.getHorseSquads() + ExpandedSingletonInitFile.getCamelSquads() + ExpandedSingletonInitFile.getCartSquads();
 		int bagsecTot = bagtot / 4;
 		final int[] inf = new int[4];
@@ -399,7 +408,7 @@ public class ManzikertDaysMarchSP {
 				bagsofar++;
 			}
 
-			LOG.info("Baggagesector " + k + " has " + mul[k] + " mules, " + don[k] + " donkeys, " + hor[k] + " horses, " + cam[k] + " camels & " + car[k] + " carts.");
+			LOG.info("Baggagesector " + k + " has " + mul[k] + " mule, " + don[k] + " donkey, " + hor[k] + " horse, " + cam[k] + " camel, " + car[k] + " cart squads.");
 		}
 
 		if (direction == CampNeighbours.RIGHT) {
