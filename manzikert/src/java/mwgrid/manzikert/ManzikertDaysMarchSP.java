@@ -96,41 +96,42 @@ public class ManzikertDaysMarchSP {
 			final Environment ENVIRONMENT =
 					PartEnvHeightOnlyImplementation.getInstance();
 			int tbs = ExpandedSingletonInitFile.getTerrainBorderSize();
-			//get data
-			int terrMaxX, terrMinX, terrMaxY, terrMinY;
-			int destMaxX, destMinX, destMaxY, destMinY;
+
 			final int startX = ExpandedSingletonInitFile.getStartLocation(dayofmarch).getX();
 			final int startY = ExpandedSingletonInitFile.getStartLocation(dayofmarch).getY();
 			int destX = ExpandedSingletonInitFile.getDestinationLocation(dayofmarch).getX();
 			int destY = ExpandedSingletonInitFile.getDestinationLocation(dayofmarch).getY();
-			destMaxX = maxX - startX + destX;
-			destMaxY = maxY - startY + destY;
-			destMinX = destX - startX - minX; 
-			destMinY = destY - startY - minY; 
-			if (destMaxX > maxX) {
-				terrMaxX = destMaxX;
+			int terrMaxX, terrMaxY, terrMinX, terrMinY;
+			
+			if (startX > destX) {
+				terrMaxX = startX;
 			} else {
-				terrMaxX = maxX;
+				terrMaxX = destX;
 			}
-			if (destMaxY > maxY) {
-				terrMaxY = destMaxY;
+
+			if (startY > destY) {
+				terrMaxY = startY;
 			} else {
-				terrMaxY = maxY;
+				terrMaxY = destY;
 			}
-			if (destMinX > minX) {
-				terrMinX = destMinX;
+
+			if (startX < destX) {
+				terrMinX = startX;
 			} else {
-				terrMinX = minX;
+				terrMinX = destX;
 			}
-			if (destMinY > minY) {
-				terrMinY = destMinY;
+
+			if (startY < destY) {
+				terrMinY = startY;
 			} else {
-				terrMinY = minY;
+				terrMinY = destY;
 			}
+
 			terrMaxX = terrMaxX + tbs;
 			terrMaxY = terrMaxY + tbs;
 			terrMinX = terrMinX - tbs;
 			terrMinY = terrMinY - tbs;
+			
 			if (terrMinX % 10 != 0) {
 				terrMinX = terrMinX - (terrMinX % 10);
 			}
@@ -143,6 +144,7 @@ public class ManzikertDaysMarchSP {
 			if (terrMaxY % 10 != 0) {
 				terrMaxY = terrMaxY - (terrMaxY % 10);
 			}
+
 			LOG.info("Writing terrain file from " + terrMinX + "," + terrMinY + " to " + terrMaxX + "," + terrMaxY);
 			try {
 				this.fOutputTerrainFile.write(terrMinX + " " + terrMinY + " " + (int)((terrMaxX - terrMinX) / 10  + 1) + " " + (int) ((terrMaxY - terrMinY) / 10 + 1));
