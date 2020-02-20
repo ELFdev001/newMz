@@ -103,25 +103,25 @@ public class ManzikertDaysMarchSP {
 			int destY = ExpandedSingletonInitFile.getDestinationLocation(dayofmarch).getY();
 			int terrMaxX, terrMaxY, terrMinX, terrMinY;
 			
-			if (startX > destX) {
+			if (startX >= destX) {
 				terrMaxX = startX;
 			} else {
 				terrMaxX = destX;
 			}
 
-			if (startY > destY) {
+			if (startY >= destY) {
 				terrMaxY = startY;
 			} else {
 				terrMaxY = destY;
 			}
 
-			if (startX < destX) {
+			if (startX <= destX) {
 				terrMinX = startX;
 			} else {
 				terrMinX = destX;
 			}
 
-			if (startY < destY) {
+			if (startY <= destY) {
 				terrMinY = startY;
 			} else {
 				terrMinY = destY;
