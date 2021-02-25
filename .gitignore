@@ -3,3 +3,8 @@ environment/src/resources/environment/gdemMED001.zip
 environment/src/resources/environment/0-500-0-750-2000-2000-2000-4000-true-DM107-test-SPdayfile.txt
 environment/src/resources/environment/Proc0-500-0-750-2000-2000-2000-4000-true-DM107-test-SPtickfile.txt
 environment/src/resources/environment/SPinitfile.txt
+*.class
+*.class
+environment/src/resources/environment/SPinitfile before heuristic muckery.txt
+environment/src/resources/environment/SPinitfile - ms2000.txt
+*.class
