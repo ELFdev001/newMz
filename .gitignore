@@ -8,3 +8,12 @@ environment/src/resources/environment/SPinitfile.txt
 environment/src/resources/environment/SPinitfile before heuristic muckery.txt
 environment/src/resources/environment/SPinitfile - ms2000.txt
 *.class
+*.class
+environment/bin/mwgrid/manzikert/ManzikertDaysMarchSP.class
+environment/bin/mwgrid/environment/ExpandedSingletonInitFile.class
+environment/bin/mwgrid/manzikert/agent/BaggageHandler.class
+environment/bin/mwgrid/manzikert/agent/MWGridAgent.class
+environment/bin/mwgrid/manzikert/agent/Officer.class
+environment/bin/mwgrid/manzikert/Blender3DPreProcessingTest.class
+environment/bin/mwgrid/manzikert/LocalObjectFactory.class
+environment/bin/mwgrid/manzikert/ManzikertDaysMarchSP.class
