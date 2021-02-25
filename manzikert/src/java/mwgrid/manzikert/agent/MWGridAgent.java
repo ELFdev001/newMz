@@ -200,7 +200,8 @@ public abstract class MWGridAgent {
 			LOG.info("Invalid Target specified!");
 		} else {
 			if (!this.fLocation.equals(targetLoc)){
-				if (!ContextSingleton.hasSpaceForMe(targetLoc, getSize())) {
+//				if (!ContextSingleton.hasSpaceForMe(targetLoc, getSize())) {
+				if (ContextSingleton.hasSpaceForMe(targetLoc, getSize())) {
 					if (!pTarget.fLastLocation.equals(Location.NULL_LOCATION)){
 						if (ContextSingleton.hasSpaceForMe(pTarget.fLastLocation, getSize())) {
 							destloc = pTarget.fLastLocation;

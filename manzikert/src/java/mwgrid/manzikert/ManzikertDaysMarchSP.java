@@ -262,6 +262,9 @@ public class ManzikertDaysMarchSP {
 
 
 		LOG.info("Creating Officer agents");
+		int offsecmul = ExpandedSingletonInitFile.getSectorMuleSquads();
+		int offmul = 0;
+		
 		for (int locX = startX + radiusOfOfficerSector; locX >= startX - radiusOfOfficerSector; locX = locX - (int) campspacebetweensquads) {
 			for (int locY = startY + radiusOfOfficerSector; locY >= startY - radiusOfOfficerSector; locY = locY - (int) campspacebetweensquads) {
 				if (locX > maxX) {
@@ -308,7 +311,24 @@ public class ManzikertDaysMarchSP {
 						}
 						officerSquadCount++;
 						unitID++;
-					}
+					} else if (offmul < offsecmul) {
+						LOG.info("Adding Mule Officer at loc " + locX + ":" + locY);
+
+						spacing = ExpandedSingletonInitFile.getSetoffSpacing();
+
+//						this.fAllAgents.add(LocalObjectFactory.createBaggageHandler(new Location(locX, locY), unitID, agentObjectID, spacing, 0, ClassType.MULE.getSpeed()));
+						this.fAllAgents.add(LocalObjectFactory.createCavalryOfficer(new Location(locX, locY), unitID, agentObjectID, spacing, 0));
+						agentObjectID++;
+
+						for (int j = 1; j <= ExpandedSingletonInitFile.getMuleSquadSize(); j++) {
+							LOG.finest("Adding Mule at loc " + locX + ":" + locY);
+							this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID));
+							agentObjectID++;
+						}
+
+						offmul++;
+						unitID++;
+					} 
 				}
 			}
 		}
@@ -413,6 +433,8 @@ public class ManzikertDaysMarchSP {
 			LOG.info("Baggagesector " + k + " has " + mul[k] + " mule, " + don[k] + " donkey, " + hor[k] + " horse, " + cam[k] + " camel, " + car[k] + " cart squads.");
 		}
 
+		int secmul = ExpandedSingletonInitFile.getSectorMuleSquads();
+		
 		if (direction == CampNeighbours.RIGHT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
 				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
@@ -447,41 +469,12 @@ public class ManzikertDaysMarchSP {
 				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
 				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
 			}
-/*		} else if (direction == CampNeighbours.DOWN) {
-			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
-			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
-			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
-			}*/
 		} else if (direction == CampNeighbours.DOWN) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
+				createSector(0, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
 				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
 				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
@@ -723,6 +716,11 @@ public class ManzikertDaysMarchSP {
 								new Location(locX, locY), unitID, agentObjectID));
 						agentObjectID++;
 					}
+					if (ExpandedSingletonInitFile.getSquadMule()) {
+						LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
+						this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.CAVALRY_SOLDIER.getSpeed()));
+						agentObjectID++;
+					}
 					cavcount++;
 					unitID++;
 
@@ -753,7 +751,11 @@ public class ManzikertDaysMarchSP {
 								new Location(locX, locY), unitID, agentObjectID));
 						agentObjectID++;
 					}
-
+					if (ExpandedSingletonInitFile.getSquadMule()) {
+						LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
+						this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.SOLDIER.getSpeed()));
+						agentObjectID++;
+					}
 					infcount++;
 					unitID++;
 
@@ -761,7 +763,8 @@ public class ManzikertDaysMarchSP {
 					LOG.info("Adding Mule Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
-						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+//	predm112					spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else if (bagcount % ExpandedSingletonInitFile.getSecondaryUnitSize() == 1) {
 						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else {
@@ -791,7 +794,8 @@ public class ManzikertDaysMarchSP {
 					LOG.finest("Adding Donkey Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
-						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+//						predm112						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else if (bagcount % ExpandedSingletonInitFile.getSecondaryUnitSize() == 1) {
 						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else {
@@ -822,7 +826,8 @@ public class ManzikertDaysMarchSP {
 					LOG.finest("Adding Horse Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
-						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+//						predm112						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else if (bagcount % ExpandedSingletonInitFile.getSecondaryUnitSize() == 1) {
 						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else {
@@ -853,7 +858,8 @@ public class ManzikertDaysMarchSP {
 					LOG.finest("Adding Camel Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
-						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+//						predm112						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else if (bagcount % ExpandedSingletonInitFile.getSecondaryUnitSize() == 1) {
 						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else {
@@ -884,7 +890,8 @@ public class ManzikertDaysMarchSP {
 					LOG.finest("Adding Cart Officer at loc " + locX + ":" + locY);
 
 					if (bagcount == 0) {
-						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+//						predm112						spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
+						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else if (bagcount % ExpandedSingletonInitFile.getSecondaryUnitSize() == 1) {
 						spacing = ExpandedSingletonInitFile.getSecondarySetoffSpacing();
 					} else {
@@ -911,6 +918,25 @@ public class ManzikertDaysMarchSP {
 					bagcount++;
 					unitID++;
 				}
+				
+				// Add Mule Sector squads onto sectors with either infantry or cavalry
+/*				if (infcount > 0 || cavcount > 0) {
+					for (int x = 0; x <= ExpandedSingletonInitFile.getSectorMuleSquads(); x++) {
+						LOG.info("Adding Sector Mule Officer at loc " + locX + ":" + locY);
+
+						spacing = ExpandedSingletonInitFile.getSetoffSpacing();
+
+						this.fAllAgents.add(LocalObjectFactory.createBaggageHandler(new Location(locX, locY), unitID, agentObjectID, spacing, columnleaders, ClassType.MULE.getSpeed()));
+						agentObjectID++;
+
+						for (int j = 1; j <= ExpandedSingletonInitFile.getMuleSquadSize(); j++) {
+							LOG.finest("Adding Mule at loc " + locX + ":" + locY);
+							this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID));
+							agentObjectID++;
+						}
+						unitID++;
+					}
+				}*/
 			}
 		}
 	}

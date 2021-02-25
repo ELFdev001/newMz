@@ -8,11 +8,11 @@ public enum ClassType {
     SOLDIER (5, 1, 70, 36, 10, 0), 
     CAVALRY_OFFICER (20, 4, 70, 59, 20, 0), 
     CAVALRY_SOLDIER (20, 4, 70, 59, 20, 0), 
-    MULE (5, 3, 0, 91, 20, 0), 
+    MULE (20, 3, 0, 91, 20, 0), 
     HORSE (5, 4, 0, 91, 20, 0), 
     CAMEL (3.33, 5, 0, 159, 22, 0), 
     DONKEY (3.33, 3, 0, 45, 18, 0), 
-    CART (4.16, 40, 0, 386, 0, 0),
+    CART (4.16, 19, 0, 386, 0, 0),
     BAGGAGE_HANDLER (5, 1, 70, 36, 10, 0);
 
     private final double speed;

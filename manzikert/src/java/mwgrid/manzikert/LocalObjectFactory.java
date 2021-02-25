@@ -51,7 +51,12 @@ public final class LocalObjectFactory {
             final int pUnitID, final int pObjectID) {
     	return new Mule(pLocation, pUnitID, pObjectID);
     }
-    
+
+    public static Mule createMule(final Location pLocation,
+            final int pUnitID, final int pObjectID, final double pSpeed) {
+    	return new Mule(pLocation, pUnitID, pObjectID, pSpeed);
+    }
+
     public static Horse createHorse(final Location pLocation,
             final int pUnitID, final int pObjectID) {
     	return new Horse(pLocation, pUnitID, pObjectID);

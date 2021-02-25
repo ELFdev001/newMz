@@ -15,6 +15,10 @@ public abstract class BaggageAnimal extends MWGridAgent {
 		super(pClassType, pCampID, pLocation, new PlanStructure(), pObjectID, pClassType.getSpeed());
 	}
 
+	public BaggageAnimal(final ClassType pClassType, final Location pLocation, final int pCampID, final int pObjectID, final double pSpeed) {
+		super(pClassType, pCampID, pLocation, new PlanStructure(), pObjectID, pSpeed);
+	}
+
 	public void firstTick() {
 		this.fSuperior = initialiseSuperior();
 	}

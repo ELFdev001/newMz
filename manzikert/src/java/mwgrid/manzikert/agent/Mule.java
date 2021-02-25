@@ -9,6 +9,9 @@ public class Mule extends BaggageAnimal{
 		super(ClassType.MULE, pLocation, pCampID, pObjectID);
 	}
 
+	public Mule(final Location pLocation, final int pCampID, final int pObjectID, final double pSpeed) {
+		super(ClassType.MULE, pLocation, pCampID, pObjectID, pSpeed);
+	}
 
 
 }
