@@ -232,10 +232,10 @@ public class ManzikertDaysMarchSP {
 		unitID = 1;
 
 		LOG.info("Calculating largest sector");
-		if (officers + officersquads > (outsideSoldierTotal / 4) && officers + officersquads > (outsideBaggageTotal / 4)) {
-			largestSector = (int) (officers + officersquads);
-		} else if (outsideSoldierTotal > outsideBaggageTotal){
-			largestSector = outsideSoldierTotal / 4;
+		if (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads() && officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideBaggageTotal / 4)) {
+			largestSector = (int) (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads());
+		} else if (outsideSoldierTotal + ExpandedSingletonInitFile.getSectorMuleSquads() > outsideBaggageTotal){
+			largestSector = (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads();
 		} else {
 			largestSector = outsideBaggageTotal / 4;
 		}
@@ -245,7 +245,7 @@ public class ManzikertDaysMarchSP {
 		if (outsideBaggageTotal > outsideSoldierTotal) {
 			lrgout = outsideBaggageTotal / 4;
 		} else {
-			lrgout = outsideSoldierTotal / 4;
+			lrgout = (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads();
 		}
 		radiusOfOuterSectors = (int) ((0.5 * Math.sqrt(lrgout)) * campspacebetweensquads);
 		LOG.info("Radius of each camp spot is " + radiusOfLargestSquare);
@@ -309,6 +309,11 @@ public class ManzikertDaysMarchSP {
 									new Location(locX, locY), unitID, agentObjectID));
 							agentObjectID++;
 						}
+						if (ExpandedSingletonInitFile.getSquadMule()) {
+							LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
+							this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.CAVALRY_SOLDIER.getSpeed()));
+							agentObjectID++;
+						}
 						officerSquadCount++;
 						unitID++;
 					} else if (offmul < offsecmul) {
@@ -316,8 +321,8 @@ public class ManzikertDaysMarchSP {
 
 						spacing = ExpandedSingletonInitFile.getSetoffSpacing();
 
-//						this.fAllAgents.add(LocalObjectFactory.createBaggageHandler(new Location(locX, locY), unitID, agentObjectID, spacing, 0, ClassType.MULE.getSpeed()));
-						this.fAllAgents.add(LocalObjectFactory.createCavalryOfficer(new Location(locX, locY), unitID, agentObjectID, spacing, 0));
+						this.fAllAgents.add(LocalObjectFactory.createBaggageHandler(new Location(locX, locY), unitID, agentObjectID, spacing, 0, ClassType.MULE.getSpeed()));
+//						this.fAllAgents.add(LocalObjectFactory.createCavalryOfficer(new Location(locX, locY), unitID, agentObjectID, spacing, 0));
 						agentObjectID++;
 
 						for (int j = 1; j <= ExpandedSingletonInitFile.getMuleSquadSize(); j++) {
@@ -760,7 +765,7 @@ public class ManzikertDaysMarchSP {
 					unitID++;
 
 				} else if (mulcount < pMulSquads) {
-					LOG.info("Adding Mule Officer at loc " + locX + ":" + locY);
+					LOG.info("Adding Mule Officer at loc " + locX + ":" + locY + ". Mule squad " + mulcount + " of " + pMulSquads);
 
 					if (bagcount == 0) {
 //	predm112					spacing = ExpandedSingletonInitFile.getSectionSetoffSpacing();
