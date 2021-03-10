@@ -682,6 +682,7 @@ public class ManzikertDaysMarchSP {
 		}
 
 		LOG.info("Creating sector " + pSector + " agents");
+		LOG.info("Creating " + pCavSquads + " cav squads, " + pInfSquads + " inf squads, " + pMulSquads + " mule squads, " + pDonSquads + " donkey squads, " + pHorSquads + " horse squads, " + pCamSquads + " camels squads & " + pCarSquads + " cart squads.");
 		for (int locX = startX + radiusOfOuterSectors; locX >= startX - radiusOfOuterSectors; locX = locX - (int) campspacebetweensquads) {
 			for (int locY = startY + radiusOfOuterSectors; locY >= startY - radiusOfOuterSectors; locY = locY - (int) campspacebetweensquads) {
 				if (locX > maxX) {
