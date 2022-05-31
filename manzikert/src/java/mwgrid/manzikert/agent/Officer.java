@@ -68,7 +68,7 @@ public class Officer extends MWGridAgent {
 				LOG.info("Agent number " + this.fObjectID + " is Column Leader #" + fColumnLeader);
 			}
 			if (!fFinalDestination.equals(Location.NULL_LOCATION)) {
-				if (this.fLocation.distanceTo(fFinalDestination) > 800) {
+				if (this.fLocation.distanceTo(fFinalDestination) > 800 && !ExpandedSingletonInitFile.getHeightcrawler()) {
 
 //					final Location[] muster = ContextSingleton.getWaypoints(fColumnLeader, fFinalDestination, this.fLocation);
 					final Location[] muster = ContextSingleton.getWaypoints(fColumnLeader, fFinalDestination, fStartLocation);
