@@ -1,19 +1,3 @@
 
 environment/src/resources/environment/gdemMED001.zip
-environment/src/resources/environment/0-500-0-750-2000-2000-2000-4000-true-DM107-test-SPdayfile.txt
-environment/src/resources/environment/Proc0-500-0-750-2000-2000-2000-4000-true-DM107-test-SPtickfile.txt
-environment/src/resources/environment/SPinitfile.txt
 *.class
-*.class
-environment/src/resources/environment/SPinitfile before heuristic muckery.txt
-environment/src/resources/environment/SPinitfile - ms2000.txt
-*.class
-*.class
-environment/bin/mwgrid/manzikert/ManzikertDaysMarchSP.class
-environment/bin/mwgrid/environment/ExpandedSingletonInitFile.class
-environment/bin/mwgrid/manzikert/agent/BaggageHandler.class
-environment/bin/mwgrid/manzikert/agent/MWGridAgent.class
-environment/bin/mwgrid/manzikert/agent/Officer.class
-environment/bin/mwgrid/manzikert/Blender3DPreProcessingTest.class
-environment/bin/mwgrid/manzikert/LocalObjectFactory.class
-environment/bin/mwgrid/manzikert/ManzikertDaysMarchSP.class
