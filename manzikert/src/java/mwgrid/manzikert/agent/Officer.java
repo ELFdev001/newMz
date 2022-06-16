@@ -74,15 +74,22 @@ public class Officer extends MWGridAgent {
 					final Location[] muster = ContextSingleton.getWaypoints(fColumnLeader, fFinalDestination, fStartLocation);
 
 					LOG.info("Splitting route into 3. Dest is " + fFinalDestination + "muster is " + muster[0] + " and muster2 is " + muster[1]);
-					fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.FOLLOW, muster[0], false)));
+					if (fSuccessor != null) {
+						fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.FOLLOW, muster[0], false)));
+					}
 					fPlanStructure.addActionPlanToPlanList(new PlanMacroRouteTo(muster[0], false));
 					fPlanStructure.addActionPlanToPlanList(new PlanMacroRouteTo(muster[1], true));
-					fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.GO_TO_CAMP, fFinalDestination, false)));
+					if (fSuccessor != null) {
+						fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.GO_TO_CAMP, fFinalDestination, false)));
+					}
 					fPlanStructure.addActionPlanToPlanList(new PlanMacroRouteTo(fFinalDestination, false));
 
 				} else {
 					LOG.fine("Single route. Dest is " + fFinalDestination);
-					fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.GO_TO_CAMP, fFinalDestination, false)));
+					if (!ExpandedSingletonInitFile.getHeightcrawler())
+					{
+						fPlanStructure.addActionPlanToPlanList(new SendMessage(fSuccessor, new Message(MessageType.GO_TO_CAMP, fFinalDestination, false)));
+					}
 					fPlanStructure.addActionPlanToPlanList(new PlanMacroRouteTo(fFinalDestination, true));
 				}
 			} else {

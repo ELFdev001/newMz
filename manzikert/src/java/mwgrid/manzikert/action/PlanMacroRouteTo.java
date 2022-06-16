@@ -70,7 +70,7 @@ public class PlanMacroRouteTo extends Action {
 		}
 
 		thisAgent.fPlanStructure.insertActionPlanToPlanList(new TravelToSolo(actualdest));
-		if (fHighDetail) {
+		if (fHighDetail && thisAgent.fSuccessor != null) {
 			thisAgent.fPlanStructure.insertActionPlanToPlanList(new SendMessage(thisAgent.fSuccessor, new Message(MessageType.FOLLOW, actualdest, true)));
 		}
 
@@ -80,7 +80,9 @@ public class PlanMacroRouteTo extends Action {
 			thisAgent.fPlanStructure.insertActionPlanToPlanList(thisact);
 			if (fHighDetail) {
 				TravelToSolo thisTTS = (TravelToSolo) thisact;
-				thisAgent.fPlanStructure.insertActionPlanToPlanList(new SendMessage(thisAgent.fSuccessor, new Message(MessageType.FOLLOW, thisTTS.fLocation, true)));
+				if (thisAgent.fSuccessor != null) {
+					thisAgent.fPlanStructure.insertActionPlanToPlanList(new SendMessage(thisAgent.fSuccessor, new Message(MessageType.FOLLOW, thisTTS.fLocation, true)));
+				}
 			}
 		}
 

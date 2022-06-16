@@ -234,10 +234,13 @@ public class ManzikertDaysMarchSP {
 		LOG.info("Calculating largest sector");
 		if (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads() && officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideBaggageTotal / 4)) {
 			largestSector = (int) (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads());
+			LOG.info("Largest sector is Officers");
 		} else if (outsideSoldierTotal + ExpandedSingletonInitFile.getSectorMuleSquads() > outsideBaggageTotal){
 			largestSector = (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads();
+			LOG.info("Largest sector is Troops");
 		} else {
 			largestSector = outsideBaggageTotal / 4;
+			LOG.info("Largest sector is Baggage");
 		}
 
 		radiusOfLargestSquare = (int) ((0.5 * Math.sqrt(largestSector)) * campspacebetweensquads);
@@ -251,7 +254,7 @@ public class ManzikertDaysMarchSP {
 		LOG.info("Radius of each camp spot is " + radiusOfLargestSquare);
 
 		LOG.info("Creating Officer Sector");
-		final int radiusOfOfficerSector = (int) ((0.5 * Math.sqrt(officers + officersquads + 1)) * campspacebetweensquads);
+		final int radiusOfOfficerSector = (int) ((0.5 * Math.sqrt(officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() + 1)) * campspacebetweensquads);
 		LOG.info("Radius of Officer sector is " + radiusOfOfficerSector);
 		final int startX = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX();
 		final int startY = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY();
@@ -485,22 +488,22 @@ public class ManzikertDaysMarchSP {
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
 				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
 				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
 				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(1, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
 				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
 				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
 				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
+				createSector(1, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
 				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(1, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
 			}
 		} else if (direction == CampNeighbours.DOWN_LEFT) {
@@ -647,7 +650,7 @@ public class ManzikertDaysMarchSP {
 			startY = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY();
 			break;
 		case 3:
-			LOG.info("Creating Sector1 (East)");
+			LOG.info("Creating Sector3 (East)");
 			startX = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			startY = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY();
 			break;
@@ -657,22 +660,22 @@ public class ManzikertDaysMarchSP {
 			startY = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			break;
 		case 5:
-			LOG.info("Creating Sector4 (NorthWest)");
+			LOG.info("Creating Sector5 (NorthWest)");
 			startX = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX() - radiusOfLargestSquare - gapbetweensectors - radiusOfOuterSectors);
 			startY = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY() - radiusOfLargestSquare - gapbetweensectors - radiusOfOuterSectors);
 			break;
 		case 6:
-			LOG.info("Creating Sector4 (NorthEast)");
+			LOG.info("Creating Sector6 (NorthEast)");
 			startX = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			startY = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY() - radiusOfLargestSquare - gapbetweensectors - radiusOfOuterSectors);
 			break;
 		case 7:
-			LOG.info("Creating Sector4 (SouthWest)");
+			LOG.info("Creating Sector7 (SouthWest)");
 			startX = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX() - radiusOfLargestSquare - gapbetweensectors - radiusOfOuterSectors);
 			startY = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			break;
 		case 8:
-			LOG.info("Creating Sector4 (SouthEast)");
+			LOG.info("Creating Sector8 (SouthEast)");
 			startX = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			startY = (int) (ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY() + radiusOfLargestSquare + gapbetweensectors + radiusOfOuterSectors);
 			break;
