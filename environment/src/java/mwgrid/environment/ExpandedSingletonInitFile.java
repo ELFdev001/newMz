@@ -85,7 +85,11 @@ public final class ExpandedSingletonInitFile {
 	private static double agentWeight;
 	private static int terrainBorderSize;
 	private static boolean squadMule;
-	private static int sectorMuleSquads;
+	private static int sectorCMuleSquads;
+	private static int sectorNMuleSquads;
+	private static int sectorWMuleSquads;
+	private static int sectorEMuleSquads;
+	private static int sectorSMuleSquads;
 
 
 	private static ExpandedSingletonInitFile INSTANCE = null;
@@ -259,8 +263,16 @@ public final class ExpandedSingletonInitFile {
 						flatterrain = Boolean.parseBoolean(thisVal);
 					} else if (thisParam.equals("SQUAD_MULE")) {
 						squadMule = Boolean.parseBoolean(thisVal);
-					} else if (thisParam.equals("SECTOR_MULE_SQUADS")) {
-						sectorMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SECTOR_C_MULE_SQUADS")) {
+						sectorCMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SECTOR_N_MULE_SQUADS")) {
+						sectorNMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SECTOR_W_MULE_SQUADS")) {
+						sectorWMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SECTOR_E_MULE_SQUADS")) {
+						sectorEMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SECTOR_S_MULE_SQUADS")) {
+						sectorSMuleSquads = Integer.parseInt(thisVal);
 					}
 				}
 			}
@@ -334,8 +346,24 @@ public final class ExpandedSingletonInitFile {
 		return flockingDistance;
 	}
 
-	public static int getSectorMuleSquads() {
-		return sectorMuleSquads;
+	public static int getSectorCMuleSquads() {
+		return sectorCMuleSquads;
+	}
+
+	public static int getSectorNMuleSquads() {
+		return sectorNMuleSquads;
+	}
+
+	public static int getSectorWMuleSquads() {
+		return sectorWMuleSquads;
+	}
+
+	public static int getSectorEMuleSquads() {
+		return sectorEMuleSquads;
+	}
+
+	public static int getSectorSMuleSquads() {
+		return sectorSMuleSquads;
 	}
 
 	public static int getTerrainBorderSize() {

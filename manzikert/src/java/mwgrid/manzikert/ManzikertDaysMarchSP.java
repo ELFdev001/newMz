@@ -230,13 +230,35 @@ public class ManzikertDaysMarchSP {
 		this.fAllAgents = new ArrayList<MWGridAgent>();
 		agentObjectID = 1;
 		unitID = 1;
+		
+		int largestsectormulesquads = 0;
+		
+		if (ExpandedSingletonInitFile.getSectorCMuleSquads() > largestsectormulesquads) {
+			largestsectormulesquads = ExpandedSingletonInitFile.getSectorCMuleSquads();
+		}
+
+		if (ExpandedSingletonInitFile.getSectorNMuleSquads() > largestsectormulesquads) {
+			largestsectormulesquads = ExpandedSingletonInitFile.getSectorNMuleSquads();
+		}
+
+		if (ExpandedSingletonInitFile.getSectorWMuleSquads() > largestsectormulesquads) {
+			largestsectormulesquads = ExpandedSingletonInitFile.getSectorWMuleSquads();
+		}
+		
+		if (ExpandedSingletonInitFile.getSectorEMuleSquads() > largestsectormulesquads) {
+			largestsectormulesquads = ExpandedSingletonInitFile.getSectorEMuleSquads();
+		}
+
+		if (ExpandedSingletonInitFile.getSectorSMuleSquads() > largestsectormulesquads) {
+			largestsectormulesquads = ExpandedSingletonInitFile.getSectorSMuleSquads();
+		}
 
 		LOG.info("Calculating largest sector");
-		if (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads() && officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() > (outsideBaggageTotal / 4)) {
-			largestSector = (int) (officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads());
+		if (officers + officersquads + largestsectormulesquads > (outsideSoldierTotal / 4) + largestsectormulesquads && officers + officersquads + largestsectormulesquads > (outsideBaggageTotal / 4)) {
+			largestSector = (int) (officers + officersquads + largestsectormulesquads);
 			LOG.info("Largest sector is Officers");
-		} else if (outsideSoldierTotal + ExpandedSingletonInitFile.getSectorMuleSquads() > outsideBaggageTotal){
-			largestSector = (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads();
+		} else if (outsideSoldierTotal + largestsectormulesquads > outsideBaggageTotal){
+			largestSector = (outsideSoldierTotal / 4) + largestsectormulesquads;
 			LOG.info("Largest sector is Troops");
 		} else {
 			largestSector = outsideBaggageTotal / 4;
@@ -248,13 +270,13 @@ public class ManzikertDaysMarchSP {
 		if (outsideBaggageTotal > outsideSoldierTotal) {
 			lrgout = outsideBaggageTotal / 4;
 		} else {
-			lrgout = (outsideSoldierTotal / 4) + ExpandedSingletonInitFile.getSectorMuleSquads();
+			lrgout = (outsideSoldierTotal / 4) + largestsectormulesquads;
 		}
 		radiusOfOuterSectors = (int) ((0.5 * Math.sqrt(lrgout)) * campspacebetweensquads);
 		LOG.info("Radius of each camp spot is " + radiusOfLargestSquare);
 
 		LOG.info("Creating Officer Sector");
-		final int radiusOfOfficerSector = (int) ((0.5 * Math.sqrt(officers + officersquads + ExpandedSingletonInitFile.getSectorMuleSquads() + 1)) * campspacebetweensquads);
+		final int radiusOfOfficerSector = (int) ((0.5 * Math.sqrt(officers + officersquads + ExpandedSingletonInitFile.getSectorCMuleSquads() + 1)) * campspacebetweensquads);
 		LOG.info("Radius of Officer sector is " + radiusOfOfficerSector);
 		final int startX = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getX();
 		final int startY = ExpandedSingletonInitFile.getStartLocation(ContextSingleton.getDay()).getY();
@@ -265,7 +287,7 @@ public class ManzikertDaysMarchSP {
 
 
 		LOG.info("Creating Officer agents");
-		int offsecmul = ExpandedSingletonInitFile.getSectorMuleSquads();
+		int offsecmul = ExpandedSingletonInitFile.getSectorCMuleSquads();
 		int offmul = 0;
 		
 		for (int locX = startX + radiusOfOfficerSector; locX >= startX - radiusOfOfficerSector; locX = locX - (int) campspacebetweensquads) {
@@ -440,156 +462,243 @@ public class ManzikertDaysMarchSP {
 
 			LOG.info("Baggagesector " + k + " has " + mul[k] + " mule, " + don[k] + " donkey, " + hor[k] + " horse, " + cam[k] + " camel, " + car[k] + " cart squads.");
 		}
-
-		int secmul = ExpandedSingletonInitFile.getSectorMuleSquads();
 		
+		int sec1mule = ExpandedSingletonInitFile.getSectorNMuleSquads();
+		int sec2mule = ExpandedSingletonInitFile.getSectorWMuleSquads();
+		int sec3mule = ExpandedSingletonInitFile.getSectorEMuleSquads();
+		int sec4mule = ExpandedSingletonInitFile.getSectorSMuleSquads();
+
 		if (direction == CampNeighbours.RIGHT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
+				createSector(0, cav[0], inf[0], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 7);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 1);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
+				createSector(0, cav[0], inf[0], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(1, cav[2], inf[2], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[3], inf[3], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 7);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 2);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(1, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(1, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
 			}
 		} else if (direction == CampNeighbours.DOWN_RIGHT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
+				createSector(0, cav[0], inf[0], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
+				createSector(0, cav[0], inf[0], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(1, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 1);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(1, cav[0], inf[0], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(1, cav[2], inf[2], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[3], inf[3], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 7);
 			}
 		} else if (direction == CampNeighbours.DOWN) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
-				createSector(0, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
+				createSector(0, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
 				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
 				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
 				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
-				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
-				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(1, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
-				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
-				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
+				createSector(0, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 8);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(1, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
 				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
 				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
-				createSector(1, cav[0], inf[0], secmul, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], secmul, 0, 0, 0, 0, 3);
+				createSector(1, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
 				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
-				createSector(1, cav[2], inf[2], secmul, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], secmul, 0, 0, 0, 0, 1);
+				createSector(1, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
 				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
 			}
 		} else if (direction == CampNeighbours.DOWN_LEFT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(1, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(1, cav[0], inf[0], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
+				createSector(1, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 5);
 			}
 		} else if (direction == CampNeighbours.LEFT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[2], inf[2], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 8);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 1);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(1, cav[2], inf[2], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 8);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(1, cav[0], inf[0], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
+				createSector(1, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			}
 		} else if (direction == CampNeighbours.UP_LEFT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 4);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[2], inf[2], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 5);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 7);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 8);
+				createSector(1, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 5);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 6);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 5);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(1, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(1, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			}
 		} else if (direction == CampNeighbours.UP) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 4);
+				createSector(0, cav[0], inf[0], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[1], inf[1], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[3], inf[3], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 5);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 3);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 5);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 7);
+				createSector(1, cav[2], inf[2], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[3], inf[3], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 6);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 2);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 5);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 6);
+				createSector(1, cav[0], inf[0], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[1], inf[1], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(1, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[3], inf[3], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			}
 		} else if (direction == CampNeighbours.UP_RIGHT) {
 			if (ExpandedSingletonInitFile.getColumns() == 1) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[2], inf[2], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 4);
+				createSector(0, cav[0], inf[0], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[1], inf[1], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[2], inf[2], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 8);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 7);
 			} else if (ExpandedSingletonInitFile.getColumns() == 2) {
-				createSector(0, cav[0], inf[0], 0, 0, 0, 0, 0, 2);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 4);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 1);
+				createSector(0, cav[0], inf[0], sec2mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[1], inf[1], sec4mule, 0, 0, 0, 0, 1);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(1, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 2);
+				createSector(0, cav[3], inf[3], sec1mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 8);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 7);
 			} else if (ExpandedSingletonInitFile.getColumns() == 3) {
-				createSector(1, cav[0], inf[0], 0, 0, 0, 0, 0, 1);
-				createSector(0, cav[1], inf[1], 0, 0, 0, 0, 0, 2);
-				createSector(1, cav[2], inf[2], 0, 0, 0, 0, 0, 3);
-				createSector(0, cav[3], inf[3], 0, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[0], don[0], hor[0], cam[0], car[0], 6);
+				createSector(0, 0, 0, mul[1], don[1], hor[1], cam[1], car[1], 5);
+				createSector(1, cav[0], inf[0], sec1mule, 0, 0, 0, 0, 1);
+				createSector(0, cav[1], inf[1], sec2mule, 0, 0, 0, 0, 2);
+				createSector(0, 0, 0, mul[2], don[2], hor[2], cam[2], car[2], 7);
+				createSector(1, cav[2], inf[2], sec3mule, 0, 0, 0, 0, 3);
+				createSector(0, cav[3], inf[3], sec4mule, 0, 0, 0, 0, 4);
+				createSector(0, 0, 0, mul[3], don[3], hor[3], cam[3], car[3], 8);
 			}
 		} else {
 			LOG.info("Direction ERROR!");
