@@ -11,7 +11,6 @@ public final class ExpandedSingletonInitFile {
 	private static final Logger LOG =
 			Logger.getLogger(ExpandedSingletonInitFile.class.getPackage().getName());
 	private static int endTime;
-	private static int startTime;
 	private static int officers;
 	private static int officerCavalrySquads;
 	private static int cavalrySquads;
@@ -36,17 +35,11 @@ public final class ExpandedSingletonInitFile {
 	private static Location startLocation;
 	private static Location[] destinationLocation;
 	private static String resourceLocation;
-	private static int numberOfALPs;
-	private static int numberOfCLPs;
 	private static int maxAgentSizeInCell;
-	private static int maxStuckTicks;
 	private static int marchSpacing;
-	private static int flockingDistance;
 	private static double initHM;
 	private static double minHM;
-	private static double initRTHM;
 	private static double HMstep;
-	private static double diagMod;
 	private static double costLevel;
 	private static double costUShall;
 	private static double costUMed;
@@ -54,20 +47,15 @@ public final class ExpandedSingletonInitFile {
 	private static double costDShall;
 	private static double costDMed;
 	private static double costDSteep;
-	private static double costRLevel;
 	private static double defaultHM;
 	private static int initMaxsteps;
-	private static int initRTMaxsteps;
 	private static int cutoffMedSteep;
 	private static int cutoffShallMed;
 	private static int cutoffLevel;
 	private static int enviroXparts;
 	private static int enviroYparts;
 	private static int enviroPartListSize;
-	private static int rangeQueryRange;
-	private static int stepsPerRQ;
 	private static boolean rest;
-	private static boolean distributed;
 	private static double cavalryLead;
 	private static double cavalryWalk;
 	private static double cavalryTrot;
@@ -90,6 +78,7 @@ public final class ExpandedSingletonInitFile {
 	private static int sectorWMuleSquads;
 	private static int sectorEMuleSquads;
 	private static int sectorSMuleSquads;
+	private static boolean squadMode;
 
 
 	private static ExpandedSingletonInitFile INSTANCE = null;
@@ -123,26 +112,14 @@ public final class ExpandedSingletonInitFile {
 						resourceLocation = thisVal;
 					} else if (thisParam.equals("END_TIME")) {
 						endTime = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("NUMBER_OF_ALPS")) {
-						numberOfALPs = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("NUMBER_OF_CLPS")) {
-						numberOfCLPs = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("START_TIME")) {
-						startTime = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("INIT_HEURISTIC_MOD")) {
 						initHM = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("MIN_HEURISTIC_MOD")) {
 						minHM = Double.parseDouble(thisVal);
-					} else if (thisParam.equals("INIT_ROADTEST_HEURISTIC_MOD")) {
-						initRTHM = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("INIT_MAXSTEPS")) {
 						initMaxsteps = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("INIT_ROADTEST_MAXSTEPS")) {
-						initRTMaxsteps = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("HM_STEP")) {
 						HMstep = Double.parseDouble(thisVal);
-					} else if (thisParam.equals("DIAGONAL_MOD")) {
-						diagMod = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("CUTOFF_MED_STEEP")) {
 						cutoffMedSteep = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("CUTOFF_SHALLOW_MED")) {
@@ -183,8 +160,6 @@ public final class ExpandedSingletonInitFile {
 						costDMed = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("COST_DOWN_STEEP")) {
 						costDSteep = Double.parseDouble(thisVal);
-					} else if (thisParam.equals("COST_ROAD_LEVEL")) {
-						costRLevel = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("DEFAULT_HEURISTIC_MOD")) {
 						defaultHM = Double.parseDouble(thisVal);
 					} else if (thisParam.equals("NUMBER_OF_X_PARTS")) {
@@ -195,22 +170,12 @@ public final class ExpandedSingletonInitFile {
 						enviroYparts = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("SIZE_OF_PART_LIST")) {
 						enviroPartListSize = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("RANGE_QUERY_RANGE")) {
-						rangeQueryRange = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("STEPS_PER_RQ")) {
-						stepsPerRQ = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("DISTRIBUTED")) {
-						distributed = Boolean.parseBoolean(thisVal);
 					} else if (thisParam.equals("TERRAIN_LOGGING")) {
 						terrainLogging = Boolean.parseBoolean(thisVal);
 					} else if (thisParam.equals("MAX_AGENT_SIZE_IN_CELL")) {
 						maxAgentSizeInCell = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("MAX_STUCK_TICKS")) {
-						maxStuckTicks = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("MARCH_SPACING")) {
 						marchSpacing = Integer.parseInt(thisVal);
-					} else if (thisParam.equals("FLOCKING_DISTANCE")) {
-						flockingDistance = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("REST")) {
 						rest = Boolean.parseBoolean(thisVal);
 					} else if (thisParam.equals("CAVALRY_LEAD")) {
@@ -273,6 +238,8 @@ public final class ExpandedSingletonInitFile {
 						sectorEMuleSquads = Integer.parseInt(thisVal);
 					} else if (thisParam.equals("SECTOR_S_MULE_SQUADS")) {
 						sectorSMuleSquads = Integer.parseInt(thisVal);
+					} else if (thisParam.equals("SQUAD_MODE")) {
+						squadMode = Boolean.parseBoolean(thisVal);
 					}
 				}
 			}
@@ -314,10 +281,6 @@ public final class ExpandedSingletonInitFile {
 		return columns;
 	}
 
-	public static boolean getDistributed() {
-		return distributed;
-	}
-
 	public static boolean getRest() {
 		return rest;
 	}
@@ -336,14 +299,6 @@ public final class ExpandedSingletonInitFile {
 
 	public static boolean get3DTrace() {
 		return trace3D;
-	}
-
-	public static int getStartTime() {
-		return startTime;
-	}
-
-	public static int getFlockingDist() {
-		return flockingDistance;
 	}
 
 	public static int getSectorCMuleSquads() {
@@ -371,19 +326,6 @@ public final class ExpandedSingletonInitFile {
 	}
 	public static int getCutoffLevel() {
 		return cutoffLevel;
-	}
-
-	public static int getRangeQueryRange() {
-		return rangeQueryRange;
-	}
-
-	public static int getStepsPerRQ() {
-		return stepsPerRQ;
-	}
-
-	public static String getOutputMemFilename() {
-		final String oTF = (int) getOfficers() + "-" + (int) getOfficerCavalrySquads() + "-" + (int) getCavalrySquads() + "-" + (int) getInfantrySquads() + "-" + getEndTime() + "-" + getEnviroXparts() + "-" + getEnviroYparts() + "-" + getEnviroPartListSize() + "-" + getRangeQueryRange() + "-" + getStepsPerRQ() + "-" + textID + "-memfile.txt";
-		return oTF;
 	}
 
 	public static String getOutputTickFilename(final int pDay) {
@@ -417,13 +359,6 @@ public final class ExpandedSingletonInitFile {
 		return destinationLocation.length;
 	}
 
-	public static int getNumberOfALPs() {
-		return numberOfALPs;
-	}
-
-	public static int getNumberOfCLPs() {
-		return numberOfCLPs;
-	}
 	public static double getInitHM() {
 		return initHM;
 	}
@@ -444,16 +379,8 @@ public final class ExpandedSingletonInitFile {
 		return minHM;
 	}
 
-	public static double getInitRTHM() {
-		return initRTHM;
-	}
-
 	public static double getHMstep() {
 		return HMstep;
-	}
-
-	public static double getDiagMod() {
-		return diagMod;
 	}
 
 	public static double getCostLevel() {
@@ -462,10 +389,6 @@ public final class ExpandedSingletonInitFile {
 
 	public static int getMaxAgentSizeInCell() {
 		return maxAgentSizeInCell;
-	}
-
-	public static int getMaxStuckTicks() {
-		return maxStuckTicks;
 	}
 
 	public static int getMarchSpacing(final boolean pIsCavalry) {
@@ -501,20 +424,12 @@ public final class ExpandedSingletonInitFile {
 		return costDSteep;
 	}
 
-	public static double getCostRLevel() {
-		return costRLevel;
-	}
-
 	public static double getDefaultHM() {
 		return defaultHM;
 	}
 
 	public static int getInitMaxsteps() {
 		return initMaxsteps;
-	}
-
-	public static int getInitRTMaxsteps() {
-		return initRTMaxsteps;
 	}
 
 	public static int getCutoffMedSteep() {
@@ -542,7 +457,11 @@ public final class ExpandedSingletonInitFile {
 	}
 
 	public static int getOfficerCavalrySquadSize() {
-		return officerCavalrySquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return officerCavalrySquadSize;
+		}
 	}
 
 	public static int getOfficerCavalrySquads() {
@@ -558,7 +477,11 @@ public final class ExpandedSingletonInitFile {
 	}
 
 	public static int getCavalrySquadSize() {
-		return cavalrySquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return cavalrySquadSize;
+		}
 	}
 
 	public static int getCampSpaceBetweenSquads() {
@@ -593,27 +516,51 @@ public final class ExpandedSingletonInitFile {
 		return muleSquads + donkeySquads + horseSquads + camelSquads + cartSquads;
 	}
 	public static int getInfantrySquadSize() {
-		return infantrySquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return infantrySquadSize;
+		}
 	}
 
 	public static int getMuleSquadSize() {
-		return muleSquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return muleSquadSize;
+		}
 	}
 
 	public static int getDonkeySquadSize() {
-		return donkeySquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return donkeySquadSize;
+		}
 	}
 
 	public static int getHorseSquadSize() {
-		return horseSquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return horseSquadSize;
+		}
 	}
 
 	public static int getCamelSquadSize() {
-		return camelSquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return camelSquadSize;
+		}
 	}
 
 	public static int getCartSquadSize() {
-		return cartSquadSize;
+		if (squadMode) {
+			return 0;
+		} else {
+			return cartSquadSize;
+		}
 	}
 
 	public static int getMarchCutoffTemp() {
@@ -642,6 +589,10 @@ public final class ExpandedSingletonInitFile {
 
 	public static double getAgentWeight() {
 		return agentWeight;
+	}
+	
+	public static boolean getSquadMode() {
+		return squadMode;
 	}
 
 	public static ExpandedSingletonInitFile getInstance(String pFilename) {
