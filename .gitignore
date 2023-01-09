@@ -3,16 +3,4 @@ environment/src/resources/environment/gdemMED001.zip
 *.class
 *.txt
 *.xlsx
-*.class
-environment/bin/mwgrid/environment/ExpandedSingletonInitFile.class
-environment/bin/mwgrid/manzikert/action/PlanMacroRouteTo.class
-environment/bin/mwgrid/manzikert/agent/BaggageAnimal.class
-environment/bin/mwgrid/manzikert/agent/BaggageHandler.class
-environment/bin/mwgrid/manzikert/agent/Mule.class
-environment/bin/mwgrid/manzikert/agent/MWGridAgent.class
-environment/bin/mwgrid/manzikert/agent/Officer.class
-environment/bin/mwgrid/manzikert/Blender3DPreProcessingTest.class
-environment/bin/mwgrid/manzikert/BlenderPreProcessingTest.class
-environment/bin/mwgrid/manzikert/ClassType.class
-environment/bin/mwgrid/manzikert/LocalObjectFactory.class
-environment/bin/mwgrid/manzikert/ManzikertDaysMarchSP.class
+environment/bin/*.*
