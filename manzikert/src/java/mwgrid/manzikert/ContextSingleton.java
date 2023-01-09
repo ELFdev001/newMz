@@ -281,6 +281,9 @@ public final class ContextSingleton {
 
 	public static boolean hasSpaceForMe(final Location pLocation, final int pSize) {
 		if (loclist.containsKey(pLocation)){
+			if (ExpandedSingletonInitFile.getSquadMode()) {
+				return false;
+			}
 			int thissize = loclist.get(pLocation);
 			if (thissize + pSize > ExpandedSingletonInitFile.getMaxAgentSizeInCell()) {
 				return false;
@@ -294,6 +297,9 @@ public final class ContextSingleton {
 
 	public static boolean hasSpace(final Location pLocation) {
 		if (loclist.containsKey(pLocation)){
+			if (ExpandedSingletonInitFile.getSquadMode()) {
+				return false;
+			}
 			int thissize = loclist.get(pLocation);
 			if (thissize > ExpandedSingletonInitFile.getMaxAgentSizeInCell()) {
 				return false;

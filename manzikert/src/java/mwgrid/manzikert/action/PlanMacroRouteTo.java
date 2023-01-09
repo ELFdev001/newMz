@@ -65,6 +65,7 @@ public class PlanMacroRouteTo extends Action {
 			while (!routePlan.equals(NullHandling.NULL_MACRO_ROUTE_PLAN) && hm > ExpandedSingletonInitFile.getMinHM()) {
 				lastSuccess = routePlan;
 				hm = hm - ExpandedSingletonInitFile.getHMstep();
+				LOG.info("Heuristic modifier is " + hm);
 				routePlan = MacroRoutePlanner.planRoute(thisAgent.fLocation, actualdest, hm, maxsteps);
 			}
 		}

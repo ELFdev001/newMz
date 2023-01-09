@@ -37,6 +37,7 @@ public final class MacroRoutePlanner {
 					MacroRoutePlanner.LOG.finest("Plan from "
 							+ pStartLocation.toString() + " -> "
 							+ pEndLocation.toString() + " = " + best);
+				LOG.info("Route planned in " + steps + " steps");
 				return best;
 			}
 			for (final MacroRoutePlan successor : best.successors()) {

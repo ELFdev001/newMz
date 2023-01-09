@@ -52,11 +52,7 @@ public class TravelToSolo extends Action {
             final Location startLoc = pAct.fLocation;
             final Location destLoc = this.fLocation;
             cost = Move.getZDir(startLoc, destLoc).get();
-            if (ExpandedSingletonInitFile.getDiagMod() > 0) {
-                if (startLoc.distanceTo(destLoc) > 10) {
-                    cost = cost + (cost * ExpandedSingletonInitFile.getDiagMod());
-                } 
-            } else if (startLoc.distanceTo(destLoc) > 10) {
+            if (startLoc.distanceTo(destLoc) > 10) {
                 cost = Math.sqrt((cost * cost) + (ExpandedSingletonInitFile.getCostLevel() * ExpandedSingletonInitFile.getCostLevel()));
             }
         }
