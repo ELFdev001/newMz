@@ -1,6 +1,8 @@
 
 environment/src/resources/environment/gdemMED001.zip
 *.class
+environment/bin/*.*
+manzikert/bin/*.*
+middleware/bin/*.*
 *.txt
 *.xlsx
-environment/bin/*.*
