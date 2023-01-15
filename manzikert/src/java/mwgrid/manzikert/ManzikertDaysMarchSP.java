@@ -334,7 +334,7 @@ public class ManzikertDaysMarchSP {
 									new Location(locX, locY), unitID, agentObjectID));
 							agentObjectID++;
 						}
-						if (ExpandedSingletonInitFile.getSquadMule()) {
+						if (ExpandedSingletonInitFile.getSquadMule() && !ExpandedSingletonInitFile.getSquadMode()) {
 							LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
 							this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.CAVALRY_SOLDIER.getSpeed()));
 							agentObjectID++;
@@ -834,7 +834,7 @@ public class ManzikertDaysMarchSP {
 								new Location(locX, locY), unitID, agentObjectID));
 						agentObjectID++;
 					}
-					if (ExpandedSingletonInitFile.getSquadMule()) {
+					if (ExpandedSingletonInitFile.getSquadMule() && !ExpandedSingletonInitFile.getSquadMode()) {
 						LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
 						this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.CAVALRY_SOLDIER.getSpeed()));
 						agentObjectID++;
@@ -869,7 +869,7 @@ public class ManzikertDaysMarchSP {
 								new Location(locX, locY), unitID, agentObjectID));
 						agentObjectID++;
 					}
-					if (ExpandedSingletonInitFile.getSquadMule()) {
+					if (ExpandedSingletonInitFile.getSquadMule() && !ExpandedSingletonInitFile.getSquadMode()) {
 						LOG.finest("Adding Squad Mule at loc " + locX + ":" + locY);
 						this.fAllAgents.add(LocalObjectFactory.createMule(new Location(locX, locY), unitID, agentObjectID, ClassType.SOLDIER.getSpeed()));
 						agentObjectID++;
