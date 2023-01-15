@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="environment/src/java"/>
-	<classpathentry kind="src" path="manzikert/src/java"/>
-	<classpathentry kind="src" path="middleware/src/java"/>
-	<classpathentry kind="lib" path="manzikert/runnabletest.jar"/>
-	<classpathentry kind="output" path="environment/bin"/>
-</classpath>
