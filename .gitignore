@@ -6,3 +6,7 @@ manzikert/bin/
 middleware/bin/
 *.txt
 *.xlsx
+environment/bin/mwgrid/manzikert/NullHandling.class
+environment/bin/mwgrid/manzikert/planning/MacroRoutePlanner.class
+environment/bin/mwgrid/manzikert/planning/MacroRoutePlanner.class
+*.class
