@@ -4,4 +4,6 @@ gdemMED001.zip
 /manzikert/bin/
 /middleware/bin/
 *.txt
+*.xlsx
 .classpath
+/bin/
