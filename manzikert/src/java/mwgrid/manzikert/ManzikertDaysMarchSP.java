@@ -400,23 +400,24 @@ public class ManzikertDaysMarchSP {
 				inf[i] = sectorTot;
 			}
 
-			//Sweep for fractions. If inf then add to last sector and if cav then add to first
-			int tempinftot = 0;
-			for (int x = 0; x < 4; x++) {
-				tempinftot = tempinftot + inf[x];
-			}
-			if (tempinftot < ExpandedSingletonInitFile.getInfantrySquads()) {
-				inf[3] = inf[3] + (ExpandedSingletonInitFile.getInfantrySquads() - tempinftot);
-			}
 
-			int tempcavtot = 0;
-			for (int x = 0; x < 4; x++) {
-				tempcavtot = tempcavtot + cav[x];
-			}
-			if (tempcavtot < ExpandedSingletonInitFile.getCavalrySquads()) {
-				cav[0] = cav[0] + (ExpandedSingletonInitFile.getCavalrySquads() - tempinftot);
-			}
+		}
 
+		//Sweep for fractions. If inf then add to last sector and if cav then add to first
+		int tempinftot = 0;
+		for (int x = 0; x < 4; x++) {
+			tempinftot = tempinftot + inf[x];
+		}
+		if (tempinftot < ExpandedSingletonInitFile.getInfantrySquads()) {
+			inf[3] = inf[3] + (ExpandedSingletonInitFile.getInfantrySquads() - tempinftot);
+		}
+
+		int tempcavtot = 0;
+		for (int x = 0; x < 4; x++) {
+			tempcavtot = tempcavtot + cav[x];
+		}
+		if (tempcavtot < ExpandedSingletonInitFile.getCavalrySquads()) {
+			cav[0] = cav[0] + (ExpandedSingletonInitFile.getCavalrySquads() - tempcavtot);
 		}
 
 		//Determine how many baggage squads go in each sector

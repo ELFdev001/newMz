@@ -160,9 +160,75 @@ public final class ContextSingleton {
 		final int dy = pEndLoc.getY();
 		final int lx = pStartLoc.getX();
 		final int ly = pStartLoc.getY();
+		int diffx = dx - lx;
+		int diffy = dy - ly;
+		int moddx = Math.abs(diffx);
+		int moddy = Math.abs(diffy);
 		CampNeighbours direction;
 
-		if (dx > (lx + 1100)) {
+		if (diffx > 0) {
+//			We are travelling East
+			if (diffy > 0) {
+				// We are travelling in SE quadrant
+				if (moddx > (3 * moddy)) {
+					//E
+					direction = CampNeighbours.RIGHT;
+				} else if ((moddx * 3) < moddy) {
+					//S
+					direction = CampNeighbours.DOWN;
+				} else {
+					//SE
+					direction = CampNeighbours.DOWN_RIGHT;
+				}
+			} else {
+				//We are travelling in NE quadrant
+				if (moddx > (3 * moddy)) {
+					//E
+					direction = CampNeighbours.RIGHT;
+				} else if ((moddx * 3) < moddy) {
+					//N
+					direction = CampNeighbours.UP;
+				} else {
+					//NE
+					direction = CampNeighbours.UP_RIGHT;
+				}
+			}
+		} else {
+//			We are travelling notEast			
+			if (diffy > 0) {
+				//We are travelling in SW quadrant
+				if (moddx > (3 * moddy)) {
+					//W
+					direction = CampNeighbours.LEFT;
+				} else if ((moddx * 3) < moddy) {
+					//S
+					direction = CampNeighbours.DOWN;
+				} else {
+					//SW
+					direction = CampNeighbours.DOWN_LEFT;
+				}
+			} else {
+				//We are travelling in NW quadrant
+				if (moddx > (3 * moddy)) {
+					//W
+					direction = CampNeighbours.LEFT;
+				} else if ((moddx * 3) < moddy) {
+					//N
+					direction = CampNeighbours.UP;
+				} else {
+					//NW
+					direction = CampNeighbours.UP_LEFT;
+				}
+			}
+		}
+		LOG.info("Returning " + direction);
+		return direction;
+			
+				
+		
+		
+		
+/*		if (dx > (lx + 1100)) {
 			if (dy > ly + 1100) {
 				direction = CampNeighbours.DOWN_RIGHT;
 			} else if (dy < ly - 1100) {
@@ -185,7 +251,7 @@ public final class ContextSingleton {
 			direction = CampNeighbours.UP;
 		}
 		LOG.info("Returning " + direction);
-		return direction;
+		return direction;*/
 	}
 
 	public static Location[] getWaypoints(final int pColLdr, final Location pDestLoc, final Location pCentreLoc) {
@@ -298,7 +364,7 @@ public final class ContextSingleton {
 	public static boolean hasSpace(final Location pLocation) {
 		if (loclist.containsKey(pLocation)){
 			if (ExpandedSingletonInitFile.getSquadMode()) {
-				return false;
+				return true;
 			}
 			int thissize = loclist.get(pLocation);
 			if (thissize > ExpandedSingletonInitFile.getMaxAgentSizeInCell()) {
