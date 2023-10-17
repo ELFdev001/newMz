@@ -16,9 +16,9 @@ public final class ESRIresample {
 	private static final Logger LOG =
 		Logger.getLogger(ESRIresample.class.getPackage().getName());
 	private static final String TICK_FILEPATH = "D:/QGISdata/";
-	private static final String TICK_FILENAME = "cliptesty.asc";
-	private static final int OUTPUTCOL = 4096;
-	private static final int OUTPUTROW = 4096;
+	private static final String TICK_FILENAME = "SquareSelectableArea18764.asc";
+	private static final int OUTPUTCOL = 1024;
+	private static final int OUTPUTROW = 1024;
 
 	private BufferedWriter fOutputTickFile;
 	private float inrows, incols;

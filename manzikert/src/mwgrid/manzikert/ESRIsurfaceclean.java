@@ -15,18 +15,17 @@ import com.sun.xml.internal.ws.api.message.HeaderList;
 public final class ESRIsurfaceclean {
 	private static final Logger LOG =
 		Logger.getLogger(ESRIsurfaceclean.class.getPackage().getName());
-	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/";
-	private static final String TICK_FILENAME = "surface.asc";
-	private static final int STARTCOL = 1800;
-	private static final int ENDCOL = 7198;
-	private static final int STARTROW = 3300;
-	private static final int ENDROW = 15648;
+	private static final String TICK_FILEPATH = "d:/QGISdata/";
+	private static final String TICK_FILENAME = "clipclop.asc";
+	private static final int STARTCOL = 0;
+	private static final int ENDCOL = 18764;
+	private static final int STARTROW = 0;
+	private static final int ENDROW = 18764;
 
 	private BufferedWriter fOutputTickFile;
 	private float inrows, incols, innodataval;
 	int rows, cols, nodataval;
-	float[][] heightdata;
-	
+	float[] heightdata;
 
 	public ESRIsurfaceclean() throws IOException {
 		BufferedReader reader = null;
@@ -70,24 +69,6 @@ public final class ESRIsurfaceclean {
 		nodataval = (int) innodataval;
 		System.out.println(cols + " " + rows + " " + nodataval);
 
-		heightdata = new float[cols][rows];
-		
-		for (int inline = 0; inline < rows; inline++) {
-			LOG.info("Line is " + inline);
-			dataLine = reader.readLine();
-			final String[] heights = dataLine.split("\\s+");
-//			System.out.println("Length of line is " + heights.length);
-			for (int inval = 1; inval < cols; inval++) {
-//				System.out.println("Col" + inval + " " + heights[inval]);
-				if (heights[inval] != null) {
-					if (Float.parseFloat(heights[inval]) == nodataval) {
-						heightdata[inval][inline] = 0;
-					} else {
-						heightdata[inval][inline] = Float.parseFloat(heights[inval]);
-					}
-				}
-			}
-		}
 		
 		//Writing outputs
 		for (int x = 0; x < 6; x++) {
@@ -95,16 +76,38 @@ public final class ESRIsurfaceclean {
 			this.fOutputTickFile.newLine();
 			this.fOutputTickFile.flush();
 		}
+
 		
-		for (int outline = STARTROW; outline < ENDROW; outline++) {
-			this.fOutputTickFile.write(getString(outline));
-			this.fOutputTickFile.newLine();
-			this.fOutputTickFile.flush();
+		
+		heightdata = new float[cols];
+
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
+		String thisString = "";
+		String[] heights;
+
+		for (int inline = 0; inline < rows; inline++) {
+			LOG.info("Line is " + inline);
+			dataLine = reader.readLine();
+			heights = dataLine.split("\\s+");
+			for (int inval = 1; inval < cols; inval++) {
+				heightdata[inval] = Float.parseFloat(heights[inval]);
+			}
+			
+			if (inline >= STARTROW && inline < ENDROW)
+			{
+				for (int x = STARTCOL + 1; x <= ENDCOL; x++) {
+//					thisString = thisString + df.format(heightdata[x]);
+					this.fOutputTickFile.write(df.format(heightdata[x]));
+					this.fOutputTickFile.write(" ");
+				}
+				this.fOutputTickFile.newLine();
+				this.fOutputTickFile.flush();
+			}
 		}
-		
 	}
 	
-	String getString(int rowno) {
+/*	String getString(int rowno) {
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);
 		String thisString = "";
@@ -113,7 +116,7 @@ public final class ESRIsurfaceclean {
 			thisString = thisString + " ";
 		}
 		return thisString;
-	}
+	}*/
 
 
 	public static void main(final String[] pArguments) throws Exception, IOException {

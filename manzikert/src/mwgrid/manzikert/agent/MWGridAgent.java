@@ -120,7 +120,7 @@ public abstract class MWGridAgent {
 	}
 
 	protected Location randomEmptyNeighbour(Location pLocation) {
-		LOG.info("Random empty neighbour from agent " + this.fObjectID + " at tick " + ContextSingleton.getTime());
+//		LOG.info("Random empty neighbour from agent " + this.fObjectID + " at tick " + ContextSingleton.getTime());
 		final List<Location> usedneighbours = new ArrayList<Location>();
 		while (usedneighbours.size() <= 8) {
 			final Location thisneighbour = CampHandling.randomNeighbour(pLocation, 1);
