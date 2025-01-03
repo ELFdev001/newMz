@@ -48,11 +48,11 @@ public final class Blender3DPreProcessingTestHC {
 
 	private static final Logger LOG =
 		Logger.getLogger(Blender3DPreProcessingTestHC.class.getPackage().getName());
-	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/environment/src/resources/environment/";
-	private static final String TICK_FILENAME = "0-1-0-0-0-36600-39900-38000-44100-false-JRRP-BriSog-SPtickfile.txt";
+	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/";
+	private static final String TICK_FILENAME = "300-10-1200-1100-8100-232900-46400-234020-46400-false-TheMan112-38-SPtickfile.txt";
 	private static final int MAX_AGENTS = 85100;
-	private static final int TICKS = 12002;
-	private static final boolean onlyEmp = true;
+	private static final int TICKS = 14002;
+	private static final boolean onlyEmp = false;
 	private int maxOutputAgents;
 
 	private BufferedWriter fOutputTickFile;
@@ -107,7 +107,7 @@ public final class Blender3DPreProcessingTestHC {
 				
 				if (pTickNo != tick) {
 					thistickno = pTickNo;
-					for (int i = 1; i <= maxOutputAgents; i++) {
+					for (int i = 1; i < maxOutputAgents; i++) {
 						if (ticks[0][i].locX != ticks[1][i].locX || ticks[0][i].locY != ticks[1][i].locY) {
 							if (!ticks[0][i].equals(NULL_TICK)) {
 								this.fOutputTickFile.write(ticks[0][i].getString());

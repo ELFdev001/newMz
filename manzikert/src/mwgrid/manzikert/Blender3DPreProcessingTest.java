@@ -44,10 +44,10 @@ public final class Blender3DPreProcessingTest {
 
 	private static final Logger LOG =
 		Logger.getLogger(Blender3DPreProcessingTest.class.getPackage().getName());
-	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/environment/src/resources/environment/";
-	private static final String TICK_FILENAME = "0-10-40-75-132-14000-40000-14000-42000-true-DM112-Test-SPtickfile.txt";
-	private static final int MAX_AGENTS = 45100;
-	private static final int TICKS = 12000;
+	private static final String TICK_FILEPATH = "D:/ManzikertSP/newMz/";
+	private static final String TICK_FILENAME = "300-10-1200-1100-5509-232900-46400-234100-46400-false-TheMan112-38-SPtickfile.txt";
+	private static final int MAX_AGENTS = 95100;
+	private static final int TICKS = 15000;
 
 	private BufferedWriter fOutputTickFile;
 
