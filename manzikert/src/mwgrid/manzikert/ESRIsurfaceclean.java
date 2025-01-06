@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.logging.Logger;
 
-import com.sun.xml.internal.ws.api.message.HeaderList;
 
 public final class ESRIsurfaceclean {
 	private static final Logger LOG =
